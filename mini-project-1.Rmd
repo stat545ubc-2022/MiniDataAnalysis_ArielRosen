@@ -1,6 +1,7 @@
 ---
 title: "Mini Data-Analysis Deliverable 1"
 author: Ariel Rosen
+date: Oct/5/2022
 output: html_document
 ---
 
@@ -98,8 +99,8 @@ And that is exactly the first thing that you will do!
 ### EXPLORE HERE -> exploring a sample of each data set using head()###
 head(flow_sample)
 head(cancer_sample)
-head(building_permits)
 head(vancouver_trees)
+head(apt_buildings)
 ```
 
 <!----------------------------------------------------------------------------->
@@ -108,13 +109,18 @@ head(vancouver_trees)
 
 <!-------------------------- Start your work below ---------------------------->
 
-I have chosen flow_sample and cancer_sample because the data stored in the tables for these two data sets are the easiest to compare between samples. For instance, the cancer sample data are all different measurements, which will be easier to tidy and wrangle compared to, for instance, the building_permit data set which would require comparisons of different addresses, which may be harder to work with. <!----------------------------------------------------------------------------->
+NEED TO ANSWER
+
+<!----------------------------------------------------------------------------->
 
 1.4 Time for the final decision! Going back to the beginning, it's important to have an *end goal* in mind. For example, if I had chosen the `titanic` dataset for my project, I might've wanted to explore the relationship between survival and other variables. Try to think of 1 research question that you would want to answer with each dataset. Note them down below, and make your final choice based on what seems more interesting to you!
 
 <!-------------------------- Start your work below ---------------------------->
-*flow_sample*: what is the relationship between time of year and flow rate? 
-*cancer_sample*: what is the relationship between size of tumour and diagnosis? 
+
+*apt_buildings*: what is the relationship between number of stories and year built?
+
+*cancer_sample*: what is the relationship between size of tumour and diagnosis?
+
 <!----------------------------------------------------------------------------->
 
 # Important note
@@ -141,6 +147,68 @@ If we rewind and go back to the learning objectives, you'll see that by the end 
 2.2 For each of the 4 exercises that you complete, provide a *brief explanation* of why you chose that exercise in relation to your data (in other words, why does it make sense to do that?), and sufficient comments for a reader to understand your reasoning and code.
 
 <!-------------------------- Start your work below ---------------------------->
+**1:Plot the distribution of a numeric variable.**
+I will plot the distribution of number of storeys using a histogram. I made the outlines black so it is easier to see the distribution. 
+```{r exercise_1}
+exercise_1 <- ggplot(apt_buildings, aes(x = no_of_storeys))+ 
+  geom_histogram(binwidth = 1, col=I("black"))
+print(exercise_1)
+```
+**2: Create a new variable based on other variables in your data (only if it makes sense)**
+I want to explore a new variable based on the number of elevators per number of units, to which buildings have an appropriate number of elevators for the buildings size. 
+
+```{r exericse_2}
+exercise_2 <- apt_buildings %>%
+  mutate(elevators_per_unit = no_of_elevators/no_of_units)
+
+head(exercise_2)
+```
+
+
+**4: explore the relationship between two variables in a plot: how does the number of stories in each building vary with the year the building as built?**
+
+It makes sense to answer this question by plotting number of stories as a function of year built to visualize the changes in the number of stories over time. I decided to use a dot plot with an alpha of 0.02 to be able to see the density distributions of the different number of stories over time.
+
+```{r exercise_4}
+exercise_4 <- apt_buildings %>%
+               ggplot(aes(year_built, no_of_storeys, alpha= 0.02))+
+               geom_point()+
+               ggtitle("Number of stories over time")+
+               ylab(label = "Number of stories")
+             
+plot(exercise_4)
+```
+
+**#6: Use a boxplot to look at the frequency of different observations within a single variable. You can do this for more than one variable if you wish!**
+
+```{r exercise_6}
+yr_blt_before_1950 <- filter(apt_buildings, year_built <= 1950)
+yr_blt_1950_today <- filter(apt_buildings, year_built > 1950)
+
+exercise_6_before_1950 <- yr_blt_before_1950 %>% 
+        ggplot(aes(group = year_built, x = year_built, y = no_of_storeys))+
+        geom_boxplot(width = 1)+ 
+        ggtitle("Frequency of number of stories from 1805 to 1950")+
+        ylab(label = "Number of stories")
+
+exercise_6_1950_today <- yr_blt_1950_today %>% 
+        ggplot(aes(group = year_built, x = year_built, y = no_of_storeys))+
+        geom_boxplot()+ 
+        ggtitle("Frequency of number of stories from 1951 to 2019")+
+        ylab(label = "Number of stories")
+  
+plot(exercise_6_before_1950)
+plot(exercise_6_1950_today)
+```
+
+**#7. Make a new tibble with a subset of your data, with variables and observations that you are interested in exploring.**
+
+I am interesting in exploring only buildings that have greater than 100 units.
+
+```{r exercise_7}
+exercise_7 <- filter(apt_buildings, no_of_units >100)
+head(exercise_7)
+```
 
 <!----------------------------------------------------------------------------->
 
