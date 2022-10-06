@@ -1,6 +1,7 @@
 ---
 title: "Mini Data-Analysis Deliverable 1"
 author: Ariel Rosen
+date: October 12, 2022
 output: md_document
 ---
 
