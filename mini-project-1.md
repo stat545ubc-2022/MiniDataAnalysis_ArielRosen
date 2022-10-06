@@ -790,7 +790,7 @@ accessibility entrance
     because it does not tell us how the distribution of accessible
     entrances has changes over time.
 
-1.  *Graphing*: \#7) Make a graph where it makes sense to customize the
+2.  *Graphing*: \#7) Make a graph where it makes sense to customize the
     alpha transparency.
 
 I want to visualize how the number of barrier free accessible units has
