@@ -103,13 +103,6 @@ head(vancouver_trees)
 head(apt_buildings)
 ```
 
-```{r}
-#exploring a the summary stats of each data set using summary()
-summary(flow_sample)
-summary(cancer_sample)
-summary(vancouver_trees)
-summary(apt_buildings)
-```
 
 <!----------------------------------------------------------------------------->
 
@@ -402,7 +395,7 @@ plot(TCHC_number_of_units_5_bins)
     apt_buildings_heat_categories <- merge(apt_buildings, heat_categories, by = "year_built")%>%
       select(id, year_built, year_built.cat, heating_type)
 
-    print(apt_buildings_heat_categories)
+    head(apt_buildings_heat_categories)
     ```
 
 -   This task is useful to answer the research question because it will be helpful to compare the actual type of heating system used in the building to the more popular heating sources of the era.
