@@ -1,2 +1,2 @@
 # MiniDataAnalysis_ArielRosen
-This repository will be used the Mini Data-Analysis in STAT 545A 2022
+This repository will be used to complete the Mini Data-Analysis project in STAT 545A 2022
