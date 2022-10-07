@@ -579,7 +579,9 @@ from 1900 to today.
 ``` r
 #First filtered the data set to only include buildings built after 1899
 apt_buildings_after_1900 <- filter(apt_buildings, year_built > 1899)
+```
 
+``` r
 #Then plot the distribution of smoking vs. non-smoking buildings over time 
 (smoking_distribution <- apt_buildings_after_1900 %>%
     ggplot(mapping = aes(x = year_built, fill = `non-smoking_building`))+ 
@@ -587,7 +589,7 @@ apt_buildings_after_1900 <- filter(apt_buildings, year_built > 1899)
     ggtitle("Distribution of smoking rules over time"))
 ```
 
-![](mini-project-1_files/figure-gfm/unnamed-chunk-9-1.png)<!-- -->
+![](mini-project-1_files/figure-gfm/unnamed-chunk-10-1.png)<!-- -->
 
 -   This task helps me answer the research question because I can
     visually see how the distribution of smoking vs. non-smoking
@@ -654,7 +656,7 @@ summary(property_type_and_no_units)
 
     ## Warning: Removed 567 rows containing non-finite values (stat_bin).
 
-![](mini-project-1_files/figure-gfm/unnamed-chunk-11-1.png)<!-- -->
+![](mini-project-1_files/figure-gfm/unnamed-chunk-12-1.png)<!-- -->
 
 ``` r
 (TCHC_number_of_units_10_bins <- property_type_and_no_units %>%
@@ -664,7 +666,7 @@ summary(property_type_and_no_units)
 
     ## Warning: Removed 3128 rows containing non-finite values (stat_bin).
 
-![](mini-project-1_files/figure-gfm/unnamed-chunk-11-2.png)<!-- -->
+![](mini-project-1_files/figure-gfm/unnamed-chunk-12-2.png)<!-- -->
 
 ``` r
 (social_number_of_units <- property_type_and_no_units %>%
@@ -674,7 +676,7 @@ summary(property_type_and_no_units)
 
     ## Warning: Removed 3215 rows containing non-finite values (stat_bin).
 
-![](mini-project-1_files/figure-gfm/unnamed-chunk-11-3.png)<!-- -->
+![](mini-project-1_files/figure-gfm/unnamed-chunk-12-3.png)<!-- -->
 
 ``` r
 #To answer the prompt, created 2 more histograms from the TCHC data with different bin sizes to compare which is best
@@ -685,7 +687,7 @@ summary(property_type_and_no_units)
 
     ## Warning: Removed 3128 rows containing non-finite values (stat_bin).
 
-![](mini-project-1_files/figure-gfm/unnamed-chunk-11-4.png)<!-- -->
+![](mini-project-1_files/figure-gfm/unnamed-chunk-12-4.png)<!-- -->
 
 ``` r
 (TCHC_number_of_units_5_bins <- property_type_and_no_units %>%
@@ -695,7 +697,7 @@ summary(property_type_and_no_units)
 
     ## Warning: Removed 3128 rows containing non-finite values (stat_bin).
 
-![](mini-project-1_files/figure-gfm/unnamed-chunk-11-5.png)<!-- -->
+![](mini-project-1_files/figure-gfm/unnamed-chunk-12-5.png)<!-- -->
 
 -   To align with the research question, I decided to create histograms
     for each property type. Then, to answer the prompt, I created 2
@@ -770,7 +772,7 @@ sources over time.
 
     ## Warning: Removed 13 rows containing non-finite values (stat_density).
 
-![](mini-project-1_files/figure-gfm/unnamed-chunk-13-1.png)<!-- -->
+![](mini-project-1_files/figure-gfm/unnamed-chunk-14-1.png)<!-- -->
 
 -   This task helps answer the research question because we can
     visualize the rise and fall in popularity of different types of
@@ -833,7 +835,7 @@ print(accessibility_over_time)
 
     ## Warning: Removed 155 rows containing missing values (geom_point).
 
-![](mini-project-1_files/figure-gfm/unnamed-chunk-15-1.png)<!-- -->
+![](mini-project-1_files/figure-gfm/unnamed-chunk-16-1.png)<!-- -->
 
 -   This tasks helps answer the research question because it allows us
     to visualize how the different accessibility features in buildings
