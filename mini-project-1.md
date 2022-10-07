@@ -1,3 +1,8 @@
+Mini Data-Analysis Deliverable 1
+================
+Ariel Rosen
+October 12, 2022
+
 # Welcome to your (maybe) first-ever data analysis project!
 
 And hopefully the first of many. Let’s get started:
@@ -10,12 +15,12 @@ And hopefully the first of many. Let’s get started:
     install.packages("devtools")
     devtools::install_github("UBC-MDS/datateachr")
 
-1.  Load the packages below.
+2.  Load the packages below.
 
-<!-- -->
-
-    library(datateachr)
-    library(tidyverse)
+``` r
+library(datateachr)
+library(tidyverse)
+```
 
     ## ── Attaching packages ─────────────────────────────────────── tidyverse 1.3.2 ──
     ## ✔ ggplot2 3.3.6      ✔ purrr   0.3.4 
@@ -26,7 +31,7 @@ And hopefully the first of many. Let’s get started:
     ## ✖ dplyr::filter() masks stats::filter()
     ## ✖ dplyr::lag()    masks stats::lag()
 
-1.  Make a repository in the <https://github.com/stat545ubc-2022>
+3.  Make a repository in the <https://github.com/stat545ubc-2022>
     Organization. You will be working with this repository for the
     entire data analysis project. You can either make it public, or make
     it private and add the TA’s and Lucy as collaborators. A link to
@@ -85,27 +90,27 @@ The `datateachr` package by Hayley Boyce and Jordan Bourak currently
 composed of 7 semi-tidy datasets for educational purposes. Here is a
 brief description of each dataset:
 
--   *apt\_buildings*: Acquired courtesy of The City of Toronto’s Open
+-   *apt_buildings*: Acquired courtesy of The City of Toronto’s Open
     Data Portal. It currently has 3455 rows and 37 columns.
 
--   *building\_permits*: Acquired courtesy of The City of Vancouver’s
+-   *building_permits*: Acquired courtesy of The City of Vancouver’s
     Open Data Portal. It currently has 20680 rows and 14 columns.
 
--   *cancer\_sample*: Acquired courtesy of UCI Machine Learning
+-   *cancer_sample*: Acquired courtesy of UCI Machine Learning
     Repository. It currently has 569 rows and 32 columns.
 
--   *flow\_sample*: Acquired courtesy of The Government of Canada’s
+-   *flow_sample*: Acquired courtesy of The Government of Canada’s
     Historical Hydrometric Database. It currently has 218 rows and 7
     columns.
 
--   *parking\_meters*: Acquired courtesy of The City of Vancouver’s Open
+-   *parking_meters*: Acquired courtesy of The City of Vancouver’s Open
     Data Portal. It currently has 10032 rows and 22 columns.
 
--   *steam\_games*: Acquired courtesy of Kaggle. It currently has 40833
+-   *steam_games*: Acquired courtesy of Kaggle. It currently has 40833
     rows and 21 columns.
 
--   *vancouver\_trees*: Acquired courtesy of The City of Vancouver’s
-    Open Data Portal. It currently has 146611 rows and 20 columns.
+-   *vancouver_trees*: Acquired courtesy of The City of Vancouver’s Open
+    Data Portal. It currently has 146611 rows and 20 columns.
 
 **Things to keep in mind**
 
@@ -137,10 +142,10 @@ understand your data.
 
 <!-------------------------- Start your work below ---------------------------->
 
-1: *flow\_sample*  
-2: *cancer\_sample*  
-3: *building\_permits*  
-4: *vancouver\_trees*
+1: *flow_sample*  
+2: *cancer_sample*  
+3: *building_permits*  
+4: *vancouver_trees*
 
 <!----------------------------------------------------------------------------->
 
@@ -157,8 +162,10 @@ comments outside of the code chunk?
 
 <!-------------------------- Start your work below ---------------------------->
 
-    #exploring a sample of each data set using head()
-    head(flow_sample)
+``` r
+#exploring a sample of each data set using head()
+head(flow_sample)
+```
 
     ## # A tibble: 6 × 7
     ##   station_id  year extreme_type month   day  flow sym  
@@ -170,7 +177,9 @@ comments outside of the code chunk?
     ## 5 05BB001     1913 maximum          6    11   232 <NA> 
     ## 6 05BB001     1914 maximum          6    18   214 <NA>
 
-    head(cancer_sample)
+``` r
+head(cancer_sample)
+```
 
     ## # A tibble: 6 × 32
     ##       ID diagn…¹ radiu…² textu…³ perim…⁴ area_…⁵ smoot…⁶ compa…⁷ conca…⁸ conca…⁹
@@ -189,7 +198,9 @@ comments outside of the code chunk?
     ## #   area_worst <dbl>, smoothness_worst <dbl>, compactness_worst <dbl>,
     ## #   concavity_worst <dbl>, concave_points_worst <dbl>, symmetry_worst <dbl>, …
 
-    head(vancouver_trees)
+``` r
+head(vancouver_trees)
+```
 
     ## # A tibble: 6 × 20
     ##   tree_id civic_number std_str…¹ genus…² speci…³ culti…⁴ commo…⁵ assig…⁶ root_…⁷
@@ -207,7 +218,9 @@ comments outside of the code chunk?
     ## #   ¹​std_street, ²​genus_name, ³​species_name, ⁴​cultivar_name, ⁵​common_name,
     ## #   ⁶​assigned, ⁷​root_barrier
 
-    head(apt_buildings)
+``` r
+head(apt_buildings)
+```
 
     ## # A tibble: 6 × 37
     ##      id air_co…¹ ameni…² balco…³ barri…⁴ bike_…⁵ exter…⁶ fire_…⁷ garba…⁸ heati…⁹
@@ -235,7 +248,7 @@ in your explanation.
 
 <!-------------------------- Start your work below ---------------------------->
 
-I have narrowed it down to vancouver\_trees and apt\_buildings because
+I have narrowed it down to vancouver_trees and apt_buildings because
 these two data sets both have a mix of categorical and numerical
 variables, which I think makes for interesting data to work.
 
@@ -251,10 +264,10 @@ interesting to you!
 
 <!-------------------------- Start your work below ---------------------------->
 
-*apt\_buildings*: what is the relationship between number of stories and
+*apt_buildings*: what is the relationship between number of stories and
 year built?
 
-*vancouver\_trees*: which tree species planted on Vancouver streets has
+*vancouver_trees*: which tree species planted on Vancouver streets has
 the largest diameter?
 
 <!----------------------------------------------------------------------------->
@@ -323,11 +336,13 @@ comments for a reader to understand your reasoning and code.
 distribution of number of storeys using a histogram. I made the outlines
 black so it is easier to see the distribution.
 
-    exercise_1 <- ggplot(apt_buildings, aes(x = no_of_storeys))+ 
-      geom_histogram(binwidth = 3, col=I("black"))
-    print(exercise_1)
+``` r
+exercise_1 <- ggplot(apt_buildings, aes(x = no_of_storeys))+ 
+  geom_histogram(binwidth = 3, col=I("black"))
+print(exercise_1)
+```
 
-![](mini-project-1_files/figure-markdown_strict/exercise_1-1.png)
+![](mini-project-1_files/figure-gfm/unnamed-chunk-3-1.png)<!-- -->
 
 **2: Create a new variable based on other variables in your data (only
 if it makes sense)**
@@ -335,10 +350,12 @@ if it makes sense)**
 I want to explore a new variable based on the number of elevators per
 number of units, to investigate which buildings have enough elevators.
 
-    exercise_2 <- apt_buildings %>%
-      mutate(elevators_per_unit = no_of_elevators/no_of_units)
+``` r
+exercise_2 <- apt_buildings %>%
+  mutate(elevators_per_unit = no_of_elevators/no_of_units)
 
-    head(exercise_2)
+head(exercise_2)
+```
 
     ## # A tibble: 6 × 38
     ##      id air_co…¹ ameni…² balco…³ barri…⁴ bike_…⁵ exter…⁶ fire_…⁷ garba…⁸ heati…⁹
@@ -368,17 +385,19 @@ stories over time. I decided to use a dot plot with an alpha of 0.02 to
 be able to see the density distributions of the different number of
 stories over time.
 
-    exercise_4 <- apt_buildings %>%
-                   ggplot(aes(year_built, no_of_storeys, alpha= 0.02))+
-                   geom_point()+
-                   ggtitle("Number of stories over time")+
-                   ylab(label = "Number of stories")
-                 
-    plot(exercise_4)
+``` r
+exercise_4 <- apt_buildings %>%
+               ggplot(aes(year_built, no_of_storeys, alpha= 0.02))+
+               geom_point()+
+               ggtitle("Number of stories over time")+
+               ylab(label = "Number of stories")
+             
+plot(exercise_4)
+```
 
     ## Warning: Removed 13 rows containing missing values (geom_point).
 
-![](mini-project-1_files/figure-markdown_strict/exercise_4-1.png)
+![](mini-project-1_files/figure-gfm/unnamed-chunk-5-1.png)<!-- -->
 
 **6: Use a boxplot to look at the frequency of different observations
 within a single variable. You can do this for more than one variable if
@@ -388,30 +407,34 @@ I want to investigate the distribution of number of stories each year. I
 decided to split it into two groups, 1805-1950 and 1951 to 2019, to
 avoid overcrowding the graph so it is easier to see.
 
-    #Separating the data into before 1950 and after 1950: 
-    yr_blt_before_1950 <- filter(apt_buildings, year_built <= 1950)
-    yr_blt_1950_today <- filter(apt_buildings, year_built > 1950)
+``` r
+#Separating the data into before 1950 and after 1950: 
+yr_blt_before_1950 <- filter(apt_buildings, year_built <= 1950)
+yr_blt_1950_today <- filter(apt_buildings, year_built > 1950)
 
-    #Using a boxplot to look at the number of storeys over the two groups of years
-    exercise_6_before_1950 <- yr_blt_before_1950 %>% 
-            ggplot(aes(group = year_built, x = year_built, y = no_of_storeys))+
-            geom_boxplot (outlier.size = 0.2)+ 
-            ggtitle("Frequency of number of stories from 1805 to 1950")+
-            ylab("Number of stories")
+#Using a boxplot to look at the number of storeys over the two groups of years
+exercise_6_before_1950 <- yr_blt_before_1950 %>% 
+        ggplot(aes(group = year_built, x = year_built, y = no_of_storeys))+
+        geom_boxplot (outlier.size = 0.2)+ 
+        ggtitle("Frequency of number of stories from 1805 to 1950")+
+        ylab("Number of stories")
 
-    exercise_6_1950_today <- yr_blt_1950_today %>% 
-            ggplot(aes(group = year_built, x = year_built, y = no_of_storeys))+
-            geom_boxplot(outlier.size = 0.2)+ 
-            ggtitle("Frequency of number of stories from 1951 to 2019")+
-            ylab("Number of stories")
-      
-    plot(exercise_6_before_1950)
+exercise_6_1950_today <- yr_blt_1950_today %>% 
+        ggplot(aes(group = year_built, x = year_built, y = no_of_storeys))+
+        geom_boxplot(outlier.size = 0.2)+ 
+        ggtitle("Frequency of number of stories from 1951 to 2019")+
+        ylab("Number of stories")
+  
+plot(exercise_6_before_1950)
+```
 
-![](mini-project-1_files/figure-markdown_strict/exercise_6-1.png)
+![](mini-project-1_files/figure-gfm/unnamed-chunk-6-1.png)<!-- -->
 
-    plot(exercise_6_1950_today)
+``` r
+plot(exercise_6_1950_today)
+```
 
-![](mini-project-1_files/figure-markdown_strict/exercise_6-2.png)
+![](mini-project-1_files/figure-gfm/unnamed-chunk-6-2.png)<!-- -->
 
 **7. Make a new tibble with a subset of your data, with variables and
 observations that you are interested in exploring.**
@@ -419,8 +442,10 @@ observations that you are interested in exploring.**
 I am interesting in exploring only buildings that have greater than 100
 units.
 
-    exercise_7 <- filter(apt_buildings, no_of_units >100)
-    head(exercise_7)
+``` r
+exercise_7 <- filter(apt_buildings, no_of_units >100)
+head(exercise_7)
+```
 
     ## # A tibble: 6 × 37
     ##      id air_co…¹ ameni…² balco…³ barri…⁴ bike_…⁵ exter…⁶ fire_…⁷ garba…⁸ heati…⁹
@@ -500,14 +525,14 @@ Ensure that the output of each operation is printed!
 
 **Graphing:**
 
-1.  Create a graph out of summarized variables that has at least two
+5.  Create a graph out of summarized variables that has at least two
     geom layers.
-2.  Create a graph of your choosing, make one of the axes logarithmic,
+6.  Create a graph of your choosing, make one of the axes logarithmic,
     and format the axes labels so that they are “pretty” or easier to
     read.
-3.  Make a graph where it makes sense to customize the alpha
+7.  Make a graph where it makes sense to customize the alpha
     transparency.
-4.  Create 3 histograms out of summarized variables, with each histogram
+8.  Create 3 histograms out of summarized variables, with each histogram
     having different sized bins. Pick the “best” one and explain why it
     is the best.
 
@@ -522,19 +547,21 @@ buildings in Toronto from 1805 until today?**
 1.  *Summarizing*: \#2) Compute the number of observations for at least
     one of your categorical variables:
 
-<!-- -->
-
-    #First separate the data set into two separate data sets, one for non-smoking buildings and the other for smoking buildings 
-    nonsmoking <- filter(apt_buildings, `non-smoking_building` == "YES")%>%
-                  select(`id`,`non-smoking_building`)
-    smoking <- filter(apt_buildings, `non-smoking_building` == "NO")%>%
-                  select(`id`,`non-smoking_building`)
-    #Next, compute the dimensions of the data sets. The number of rows is the number of buildings in each category
-    dim(nonsmoking)
+``` r
+#First separate the data set into two separate data sets, one for non-smoking buildings and the other for smoking buildings 
+nonsmoking <- filter(apt_buildings, `non-smoking_building` == "YES")%>%
+              select(`id`,`non-smoking_building`)
+smoking <- filter(apt_buildings, `non-smoking_building` == "NO")%>%
+              select(`id`,`non-smoking_building`)
+#Next, compute the dimensions of the data sets. The number of rows is the number of buildings in each category
+dim(nonsmoking)
+```
 
     ## [1] 1290    2
 
-    dim(smoking)
+``` r
+dim(smoking)
+```
 
     ## [1] 2071    2
 
@@ -545,7 +572,7 @@ buildings in Toronto from 1805 until today?**
     However, it doesn’t help me understand how this distribution has
     changed over time.
 
-1.  *Graphing*: \#5) Create a graph out of summarized variables that has
+2.  *Graphing*: \#5) Create a graph out of summarized variables that has
     at least two geom layers:
 
 I want to visualize how the distribution of smoking vs. non-smoking
@@ -555,18 +582,20 @@ built after 1900 because there are very few buildings recorded prior to
 it very small and difficult to see the distribution of smoking rules
 from 1900 to today.
 
-    #First filtered the data set to only include buildings built after 1899
-    apt_buildings_after_1900 <- filter(apt_buildings, year_built > 1899)
+``` r
+#First filtered the data set to only include buildings built after 1899
+apt_buildings_after_1900 <- filter(apt_buildings, year_built > 1899)
 
-    #Then plot the distribution of smoking vs. non-smoking buildings over time 
-    smoking_distribution <- apt_buildings_after_1900 %>%
-        ggplot(mapping = aes(x = year_built, fill = `non-smoking_building`))+ 
-        geom_bar(width =0.7)+
-        ggtitle("Distribution of smoking rules over time")
+#Then plot the distribution of smoking vs. non-smoking buildings over time 
+smoking_distribution <- apt_buildings_after_1900 %>%
+    ggplot(mapping = aes(x = year_built, fill = `non-smoking_building`))+ 
+    geom_bar(width =0.7)+
+    ggtitle("Distribution of smoking rules over time")
 
-    plot(smoking_distribution)
+plot(smoking_distribution)
+```
 
-![](mini-project-1_files/figure-markdown_strict/unnamed-chunk-4-1.png)
+![](mini-project-1_files/figure-gfm/unnamed-chunk-9-1.png)<!-- -->
 
 -   This task helps me answer the research question because I can
     visually see how the distribution of smoking vs. non-smoking
@@ -583,14 +612,16 @@ Computing the summary statistics of the number of units across the
 groups of types of properties. Here, I am using number of units as a
 proxy for the size of the apartment building.
 
-    #Pivot wider to make property type into columns with values from number of units 
-    property_type_and_no_units <- apt_buildings %>%
-              pivot_wider(id_cols = id,
-              names_from = property_type, 
-              values_from = no_of_units) 
+``` r
+#Pivot wider to make property type into columns with values from number of units 
+property_type_and_no_units <- apt_buildings %>%
+          pivot_wider(id_cols = id,
+          names_from = property_type, 
+          values_from = no_of_units) 
 
-    #Compute summary stats of property_type_no_units
-    summary(property_type_and_no_units)
+#Compute summary stats of property_type_no_units
+summary(property_type_and_no_units)
+```
 
     ##        id           PRIVATE             TCHC       SOCIAL HOUSING 
     ##  Min.   :10359   Min.   :   0.00   Min.   : 11.0   Min.   : 10.0  
@@ -617,65 +648,73 @@ proxy for the size of the apartment building.
     statistics do not tell me if the differences I’m observing are
     actually statistically significant.
 
-1.  *Graphing*: \#5) Create 3 histograms out of summarized variables,
+2.  *Graphing*: \#5) Create 3 histograms out of summarized variables,
     with each histogram having different sized bins. Pick the “best” one
     and explain why it is the best:
 
-<!-- -->
+``` r
+#First create histograms with distributions of number of units for each of the property types, using the data set created above
 
-    #First create histograms with distributions of number of units for each of the property types, using the data set created above
+priv_number_of_units <- property_type_and_no_units %>%
+  ggplot(aes(PRIVATE))+ geom_histogram(bins = 15)+ 
+  ggtitle("Distribution of number of units across private properties")
 
-    priv_number_of_units <- property_type_and_no_units %>%
-      ggplot(aes(PRIVATE))+ geom_histogram(bins = 15)+ 
-      ggtitle("Distribution of number of units across private properties")
+TCHC_number_of_units_10_bins <- property_type_and_no_units %>%
+  ggplot(aes(TCHC))+ geom_histogram(bins = 10)+ 
+  ggtitle("Distribution of number of units across TCHC properties (10 bins)")
 
-    TCHC_number_of_units_10_bins <- property_type_and_no_units %>%
-      ggplot(aes(TCHC))+ geom_histogram(bins = 10)+ 
-      ggtitle("Distribution of number of units across TCHC properties (10 bins)")
+social_number_of_units <- property_type_and_no_units %>%
+  ggplot(aes(`SOCIAL HOUSING`))+ geom_histogram(bins = 10)+ 
+  ggtitle("Distribution of number of units across social housing properties")
 
-    social_number_of_units <- property_type_and_no_units %>%
-      ggplot(aes(`SOCIAL HOUSING`))+ geom_histogram(bins = 10)+ 
-      ggtitle("Distribution of number of units across social housing properties")
+#To answer the prompt, created 2 more histograms from the TCHC data with different bin sizes to compare which is best
+TCHC_number_of_units_20_bins <- property_type_and_no_units %>%
+  ggplot(aes(TCHC))+ geom_histogram(bins = 20)+ 
+  ggtitle("Distribution of number of units across TCHC properties (20 bins)")
 
-    #To answer the prompt, created 2 more histograms from the TCHC data with different bin sizes to compare which is best
-    TCHC_number_of_units_20_bins <- property_type_and_no_units %>%
-      ggplot(aes(TCHC))+ geom_histogram(bins = 20)+ 
-      ggtitle("Distribution of number of units across TCHC properties (20 bins)")
+TCHC_number_of_units_5_bins <- property_type_and_no_units %>%
+  ggplot(aes(TCHC))+ geom_histogram(bins = 5)+ 
+  ggtitle("Distribution of number of units across TCHC properties (5 bins)")
 
-    TCHC_number_of_units_5_bins <- property_type_and_no_units %>%
-      ggplot(aes(TCHC))+ geom_histogram(bins = 5)+ 
-      ggtitle("Distribution of number of units across TCHC properties (5 bins)")
-
-    #plot the histograms 
-    plot(priv_number_of_units)
+#plot the histograms 
+plot(priv_number_of_units)
+```
 
     ## Warning: Removed 567 rows containing non-finite values (stat_bin).
 
-![](mini-project-1_files/figure-markdown_strict/unnamed-chunk-6-1.png)
+![](mini-project-1_files/figure-gfm/unnamed-chunk-11-1.png)<!-- -->
 
-    plot(social_number_of_units)
+``` r
+plot(social_number_of_units)
+```
 
     ## Warning: Removed 3215 rows containing non-finite values (stat_bin).
 
-![](mini-project-1_files/figure-markdown_strict/unnamed-chunk-6-2.png)
+![](mini-project-1_files/figure-gfm/unnamed-chunk-11-2.png)<!-- -->
 
-    plot(TCHC_number_of_units_10_bins)
-
-    ## Warning: Removed 3128 rows containing non-finite values (stat_bin).
-
-![](mini-project-1_files/figure-markdown_strict/unnamed-chunk-6-3.png)
-
-    plot(TCHC_number_of_units_20_bins)
+``` r
+plot(TCHC_number_of_units_10_bins)
+```
 
     ## Warning: Removed 3128 rows containing non-finite values (stat_bin).
 
-![](mini-project-1_files/figure-markdown_strict/unnamed-chunk-6-4.png)
+![](mini-project-1_files/figure-gfm/unnamed-chunk-11-3.png)<!-- -->
 
-    plot(TCHC_number_of_units_5_bins)
+``` r
+plot(TCHC_number_of_units_20_bins)
+```
 
     ## Warning: Removed 3128 rows containing non-finite values (stat_bin).
 
-![](mini-project-1_files/figure-markdown_strict/unnamed-chunk-6-5.png)
+![](mini-project-1_files/figure-gfm/unnamed-chunk-11-4.png)<!-- -->
+
+``` r
+plot(TCHC_number_of_units_5_bins)
+```
+
+    ## Warning: Removed 3128 rows containing non-finite values (stat_bin).
+
+![](mini-project-1_files/figure-gfm/unnamed-chunk-11-5.png)<!-- -->
 
 -   To align with the research question, I decided to create histograms
     for each property type. Then, to answer the prompt, I created 2
@@ -707,50 +746,51 @@ heated changed from 1805 to today?**
 
     -   Central heating systems were invented in 1919
 
-    <!-- -->
+``` r
+#First isolating only the year_built category from the entire data set
+year_built_only <- select(apt_buildings, year_built)
 
-        #First isolating only the year_built category from the entire data set
-        year_built_only <- select(apt_buildings, year_built)
+#Dividing the years_built_only  into 3 categories based on stoves, electric, and central heat invention years
+    heat_categories <- within(year_built_only, 
+    {year_built.cat <- NA
+     year_built.cat[year_built < 1883] <- "stove and fireplace"
+     year_built.cat[year_built >= 1883 & year_built < 1919] <- "electric heater"
+     year_built.cat[year_built >= 1919] <- "central heat"}) 
+#Making a new data frame with only heat category and year built
+    apt_buildings_heat_categories <- merge(apt_buildings, heat_categories, by = "year_built")%>%
+      select(id, year_built, year_built.cat, heating_type)
 
-        #Dividing the years_built_only  into 3 categories based on stoves, electric, and central heat invention years
-        heat_categories <- within(year_built_only, 
-        {year_built.cat <- NA
-         year_built.cat[year_built < 1883] <- "stove and fireplace"
-         year_built.cat[year_built >= 1883 & year_built < 1919] <- "electric heater"
-         year_built.cat[year_built >= 1919] <- "central heat"}) 
+head(apt_buildings_heat_categories)
+```
 
-        #Making a new data frame with only heat category and year built
-        apt_buildings_heat_categories <- merge(apt_buildings, heat_categories, by = "year_built")%>%
-          select(id, year_built, year_built.cat, heating_type)
-
-        head(apt_buildings_heat_categories)
-
-        ##      id year_built      year_built.cat heating_type
-        ## 1 12064       1805 stove and fireplace    HOT WATER
-        ## 2 10424       1809 stove and fireplace    HOT WATER
-        ## 3 10906       1838 stove and fireplace     ELECTRIC
-        ## 4 12869       1880 stove and fireplace    HOT WATER
-        ## 5 10905       1885     electric heater     ELECTRIC
-        ## 6 10905       1885     electric heater     ELECTRIC
+    ##      id year_built      year_built.cat heating_type
+    ## 1 12064       1805 stove and fireplace    HOT WATER
+    ## 2 10424       1809 stove and fireplace    HOT WATER
+    ## 3 10906       1838 stove and fireplace     ELECTRIC
+    ## 4 12869       1880 stove and fireplace    HOT WATER
+    ## 5 10905       1885     electric heater     ELECTRIC
+    ## 6 10905       1885     electric heater     ELECTRIC
 
 -   This task is useful to answer the research question because it will
     be helpful to compare the actual type of heating system used in the
     building to the more popular heating sources of the era.
 
-1.  *Graphing*: \#5) Create a graph out of summarized variables that has
+2.  *Graphing*: \#5) Create a graph out of summarized variables that has
     at least two geom layers:
 
 I want to create a plot showing the distribution of different heating
 sources over time.
 
-    heating_over_time <- apt_buildings %>%
-      ggplot(aes(x= year_built))+
-      geom_density(aes(group = `heating_type`, color = `heating_type`))
-    plot(heating_over_time)
+``` r
+heating_over_time <- apt_buildings %>%
+  ggplot(aes(x= year_built))+
+  geom_density(aes(group = `heating_type`, color = `heating_type`))
+plot(heating_over_time)
+```
 
     ## Warning: Removed 13 rows containing non-finite values (stat_density).
 
-![](mini-project-1_files/figure-markdown_strict/unnamed-chunk-8-1.png)
+![](mini-project-1_files/figure-gfm/unnamed-chunk-13-1.png)<!-- -->
 
 -   This task helps answer the research question because we can
     visualize the rise and fall in popularity of different types of
@@ -767,19 +807,23 @@ buildings in Toronto from 1805 to today?**
 I want to compute the number of buildings that have a barrier free
 accessibility entrance
 
-    #First separate the data set into two separate data sets, one for accessible entrances, and one for non-accessible entrances: 
-    barrier_free_entrance <- filter (apt_buildings, `barrier_free_accessibilty_entr` == "YES") %>%
-                select(`id`,`barrier_free_accessibilty_entr`)
+``` r
+#First separate the data set into two separate data sets, one for accessible entrances, and one for non-accessible entrances: 
+barrier_free_entrance <- filter (apt_buildings, `barrier_free_accessibilty_entr` == "YES") %>%
+            select(`id`,`barrier_free_accessibilty_entr`)
 
-    barrier_entrance <- filter (apt_buildings, `barrier_free_accessibilty_entr` == "NO") %>%
-                select(`id`,`barrier_free_accessibilty_entr`)
+barrier_entrance <- filter (apt_buildings, `barrier_free_accessibilty_entr` == "NO") %>%
+            select(`id`,`barrier_free_accessibilty_entr`)
 
-    #Next, compute the dimensions of the data sets. The number of rows is the number of buildings in each category
-    dim(barrier_free_entrance)
+#Next, compute the dimensions of the data sets. The number of rows is the number of buildings in each category
+dim(barrier_free_entrance)
+```
 
     ## [1] 1339    2
 
-    dim(barrier_entrance)
+``` r
+dim(barrier_entrance)
+```
 
     ## [1] 2034    2
 
@@ -797,17 +841,19 @@ I want to visualize how the number of barrier free accessible units has
 changed over time, and to see if buildings with more barrier free
 accessible units also a barrier free accessible entrance.
 
-    accessibility_over_time <- apt_buildings %>%
-                        ggplot(aes(x = year_built, y = no_barrier_free_accessible_units))+ 
-                        geom_point(alpha = 0.5, aes(color = barrier_free_accessibilty_entr))+ 
-                        ggtitle("Accessibility features over time")+
-                        ylab("Number of barrier free accessible units")+
-                        xlab("Year built")
-    print(accessibility_over_time)
+``` r
+accessibility_over_time <- apt_buildings %>%
+                    ggplot(aes(x = year_built, y = no_barrier_free_accessible_units))+ 
+                    geom_point(alpha = 0.5, aes(color = barrier_free_accessibilty_entr))+ 
+                    ggtitle("Accessibility features over time")+
+                    ylab("Number of barrier free accessible units")+
+                    xlab("Year built")
+print(accessibility_over_time)
+```
 
     ## Warning: Removed 155 rows containing missing values (geom_point).
 
-![](mini-project-1_files/figure-markdown_strict/unnamed-chunk-10-1.png)
+![](mini-project-1_files/figure-gfm/unnamed-chunk-15-1.png)<!-- -->
 
 -   This tasks helps answer the research question because it allows us
     to visualize how the different accessibility features in buildings
