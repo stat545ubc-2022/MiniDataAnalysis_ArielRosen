@@ -386,13 +386,11 @@ be able to see the density distributions of the different number of
 stories over time.
 
 ``` r
-exercise_4 <- apt_buildings %>%
+(exercise_4 <- apt_buildings %>%
                ggplot(aes(year_built, no_of_storeys, alpha= 0.02))+
                geom_point()+
                ggtitle("Number of stories over time")+
-               ylab(label = "Number of stories")
-             
-plot(exercise_4)
+               ylab(label = "Number of stories"))
 ```
 
     ## Warning: Removed 13 rows containing missing values (geom_point).
@@ -413,25 +411,21 @@ yr_blt_before_1950 <- filter(apt_buildings, year_built <= 1950)
 yr_blt_1950_today <- filter(apt_buildings, year_built > 1950)
 
 #Using a boxplot to look at the number of storeys over the two groups of years
-exercise_6_before_1950 <- yr_blt_before_1950 %>% 
+(exercise_6_before_1950 <- yr_blt_before_1950 %>% 
         ggplot(aes(group = year_built, x = year_built, y = no_of_storeys))+
         geom_boxplot (outlier.size = 0.2)+ 
         ggtitle("Frequency of number of stories from 1805 to 1950")+
-        ylab("Number of stories")
-
-exercise_6_1950_today <- yr_blt_1950_today %>% 
-        ggplot(aes(group = year_built, x = year_built, y = no_of_storeys))+
-        geom_boxplot(outlier.size = 0.2)+ 
-        ggtitle("Frequency of number of stories from 1951 to 2019")+
-        ylab("Number of stories")
-  
-plot(exercise_6_before_1950)
+        ylab("Number of stories"))
 ```
 
 ![](mini-project-1_files/figure-gfm/unnamed-chunk-6-1.png)<!-- -->
 
 ``` r
-plot(exercise_6_1950_today)
+(exercise_6_1950_today <- yr_blt_1950_today %>% 
+        ggplot(aes(group = year_built, x = year_built, y = no_of_storeys))+
+        geom_boxplot(outlier.size = 0.2)+ 
+        ggtitle("Frequency of number of stories from 1951 to 2019")+
+        ylab("Number of stories"))
 ```
 
 ![](mini-project-1_files/figure-gfm/unnamed-chunk-6-2.png)<!-- -->
@@ -587,12 +581,10 @@ from 1900 to today.
 apt_buildings_after_1900 <- filter(apt_buildings, year_built > 1899)
 
 #Then plot the distribution of smoking vs. non-smoking buildings over time 
-smoking_distribution <- apt_buildings_after_1900 %>%
+(smoking_distribution <- apt_buildings_after_1900 %>%
     ggplot(mapping = aes(x = year_built, fill = `non-smoking_building`))+ 
     geom_bar(width =0.7)+
-    ggtitle("Distribution of smoking rules over time")
-
-plot(smoking_distribution)
+    ggtitle("Distribution of smoking rules over time"))
 ```
 
 ![](mini-project-1_files/figure-gfm/unnamed-chunk-9-1.png)<!-- -->
@@ -655,29 +647,9 @@ summary(property_type_and_no_units)
 ``` r
 #First create histograms with distributions of number of units for each of the property types, using the data set created above
 
-priv_number_of_units <- property_type_and_no_units %>%
+(priv_number_of_units <- property_type_and_no_units %>%
   ggplot(aes(PRIVATE))+ geom_histogram(bins = 15)+ 
-  ggtitle("Distribution of number of units across private properties")
-
-TCHC_number_of_units_10_bins <- property_type_and_no_units %>%
-  ggplot(aes(TCHC))+ geom_histogram(bins = 10)+ 
-  ggtitle("Distribution of number of units across TCHC properties (10 bins)")
-
-social_number_of_units <- property_type_and_no_units %>%
-  ggplot(aes(`SOCIAL HOUSING`))+ geom_histogram(bins = 10)+ 
-  ggtitle("Distribution of number of units across social housing properties")
-
-#To answer the prompt, created 2 more histograms from the TCHC data with different bin sizes to compare which is best
-TCHC_number_of_units_20_bins <- property_type_and_no_units %>%
-  ggplot(aes(TCHC))+ geom_histogram(bins = 20)+ 
-  ggtitle("Distribution of number of units across TCHC properties (20 bins)")
-
-TCHC_number_of_units_5_bins <- property_type_and_no_units %>%
-  ggplot(aes(TCHC))+ geom_histogram(bins = 5)+ 
-  ggtitle("Distribution of number of units across TCHC properties (5 bins)")
-
-#plot the histograms 
-plot(priv_number_of_units)
+  ggtitle("Distribution of number of units across private properties"))
 ```
 
     ## Warning: Removed 567 rows containing non-finite values (stat_bin).
@@ -685,23 +657,30 @@ plot(priv_number_of_units)
 ![](mini-project-1_files/figure-gfm/unnamed-chunk-11-1.png)<!-- -->
 
 ``` r
-plot(social_number_of_units)
-```
-
-    ## Warning: Removed 3215 rows containing non-finite values (stat_bin).
-
-![](mini-project-1_files/figure-gfm/unnamed-chunk-11-2.png)<!-- -->
-
-``` r
-plot(TCHC_number_of_units_10_bins)
+(TCHC_number_of_units_10_bins <- property_type_and_no_units %>%
+  ggplot(aes(TCHC))+ geom_histogram(bins = 10)+ 
+  ggtitle("Distribution of number of units across TCHC properties (10 bins)"))
 ```
 
     ## Warning: Removed 3128 rows containing non-finite values (stat_bin).
 
+![](mini-project-1_files/figure-gfm/unnamed-chunk-11-2.png)<!-- -->
+
+``` r
+(social_number_of_units <- property_type_and_no_units %>%
+  ggplot(aes(`SOCIAL HOUSING`))+ geom_histogram(bins = 10)+ 
+  ggtitle("Distribution of number of units across social housing properties"))
+```
+
+    ## Warning: Removed 3215 rows containing non-finite values (stat_bin).
+
 ![](mini-project-1_files/figure-gfm/unnamed-chunk-11-3.png)<!-- -->
 
 ``` r
-plot(TCHC_number_of_units_20_bins)
+#To answer the prompt, created 2 more histograms from the TCHC data with different bin sizes to compare which is best
+(TCHC_number_of_units_20_bins <- property_type_and_no_units %>%
+  ggplot(aes(TCHC))+ geom_histogram(bins = 20)+ 
+  ggtitle("Distribution of number of units across TCHC properties (20 bins)"))
 ```
 
     ## Warning: Removed 3128 rows containing non-finite values (stat_bin).
@@ -709,7 +688,9 @@ plot(TCHC_number_of_units_20_bins)
 ![](mini-project-1_files/figure-gfm/unnamed-chunk-11-4.png)<!-- -->
 
 ``` r
-plot(TCHC_number_of_units_5_bins)
+(TCHC_number_of_units_5_bins <- property_type_and_no_units %>%
+  ggplot(aes(TCHC))+ geom_histogram(bins = 5)+ 
+  ggtitle("Distribution of number of units across TCHC properties (5 bins)"))
 ```
 
     ## Warning: Removed 3128 rows containing non-finite values (stat_bin).
@@ -751,13 +732,13 @@ heated changed from 1805 to today?**
 year_built_only <- select(apt_buildings, year_built)
 
 #Dividing the years_built_only  into 3 categories based on stoves, electric, and central heat invention years
-    heat_categories <- within(year_built_only, 
-    {year_built.cat <- NA
-     year_built.cat[year_built < 1883] <- "stove and fireplace"
-     year_built.cat[year_built >= 1883 & year_built < 1919] <- "electric heater"
-     year_built.cat[year_built >= 1919] <- "central heat"}) 
+heat_categories <- within(year_built_only, 
+{year_built.cat <- NA
+ year_built.cat[year_built < 1883] <- "stove and fireplace"
+ year_built.cat[year_built >= 1883 & year_built < 1919] <- "electric heater"
+ year_built.cat[year_built >= 1919] <- "central heat"}) 
 #Making a new data frame with only heat category and year built
-    apt_buildings_heat_categories <- merge(apt_buildings, heat_categories, by = "year_built")%>%
+apt_buildings_heat_categories <- merge(apt_buildings, heat_categories, by = "year_built")%>%
       select(id, year_built, year_built.cat, heating_type)
 
 head(apt_buildings_heat_categories)
@@ -782,10 +763,9 @@ I want to create a plot showing the distribution of different heating
 sources over time.
 
 ``` r
-heating_over_time <- apt_buildings %>%
+(heating_over_time <- apt_buildings %>%
   ggplot(aes(x= year_built))+
-  geom_density(aes(group = `heating_type`, color = `heating_type`))
-plot(heating_over_time)
+  geom_density(aes(group = `heating_type`, color = `heating_type`)))
 ```
 
     ## Warning: Removed 13 rows containing non-finite values (stat_density).
