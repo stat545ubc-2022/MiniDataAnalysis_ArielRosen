@@ -292,7 +292,7 @@ apt_buildings_after_1900 <- filter(apt_buildings, year_built > 1899)
 
 ```{r}
 #Then plot the distribution of smoking vs. non-smoking buildings over time 
-(smoking_distribution <- apt_buildings_after_1900 %>%
+(apt_buildings_after_1900 %>%
     ggplot(mapping = aes(x = year_built, fill = `non-smoking_building`))+ 
     geom_bar(width =0.7)+
     ggtitle("Distribution of smoking rules over time"))
