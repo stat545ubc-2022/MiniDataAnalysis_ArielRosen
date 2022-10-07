@@ -2,7 +2,7 @@
 title: "Mini Data-Analysis Deliverable 1"
 author: Ariel Rosen
 date: October 12, 2022
-output: md_document
+output: github_document
 ---
 
 # Welcome to your (maybe) first-ever data analysis project!
@@ -95,7 +95,7 @@ And that is exactly the first thing that you will do!
 
 <!-------------------------- Start your work below ---------------------------->
 
-```{r global_options}
+```{r}
 #exploring a sample of each data set using head()
 head(flow_sample)
 head(cancer_sample)
@@ -151,7 +151,7 @@ If we rewind and go back to the learning objectives, you'll see that by the end 
 
 **1: Plot the distribution of a numeric variable.** I will plot the distribution of number of storeys using a histogram. I made the outlines black so it is easier to see the distribution.
 
-```{r2 global_options}
+```{r}
 exercise_1 <- ggplot(apt_buildings, aes(x = no_of_storeys))+ 
   geom_histogram(binwidth = 3, col=I("black"))
 print(exercise_1)
@@ -161,7 +161,7 @@ print(exercise_1)
 
 I want to explore a new variable based on the number of elevators per number of units, to investigate which buildings have enough elevators.
 
-```{r3 global_options}
+```{r}
 exercise_2 <- apt_buildings %>%
   mutate(elevators_per_unit = no_of_elevators/no_of_units)
 
@@ -174,7 +174,7 @@ head(exercise_2)
 
 It makes sense to answer this question by plotting number of stories as a function of year built to visualize the changes in the number of stories over time. I decided to use a dot plot with an alpha of 0.02 to be able to see the density distributions of the different number of stories over time.
 
-```{r4 global_options}
+```{r}
 exercise_4 <- apt_buildings %>%
                ggplot(aes(year_built, no_of_storeys, alpha= 0.02))+
                geom_point()+
@@ -188,7 +188,7 @@ plot(exercise_4)
 
 I want to investigate the distribution of number of stories each year. I decided to split it into two groups, 1805-1950 and 1951 to 2019, to avoid overcrowding the graph so it is easier to see.
 
-```{r5 global_options}
+```{r}
 #Separating the data into before 1950 and after 1950: 
 yr_blt_before_1950 <- filter(apt_buildings, year_built <= 1950)
 yr_blt_1950_today <- filter(apt_buildings, year_built > 1950)
@@ -214,7 +214,7 @@ plot(exercise_6_1950_today)
 
 I am interesting in exploring only buildings that have greater than 100 units.
 
-```{r6 global_options}
+```{r}
 exercise_7 <- filter(apt_buildings, no_of_units >100)
 head(exercise_7)
 ```
@@ -269,7 +269,7 @@ Make sure it's clear what research question you are doing each operation for!
 
 1.  *Summarizing*: #2) Compute the number of observations for at least one of your categorical variables:
 
-```{r7 global_options}
+```{r}
 #First separate the data set into two separate data sets, one for non-smoking buildings and the other for smoking buildings 
 nonsmoking <- filter(apt_buildings, `non-smoking_building` == "YES")%>%
               select(`id`,`non-smoking_building`)
@@ -287,7 +287,7 @@ dim(smoking)
 
 I want to visualize how the distribution of smoking vs. non-smoking buildings has changed over time. I am limiting the plot to buildings built after 1900 because there are very few buildings recorded prior to 1900, and including the buildings built prior to 1900 in the plot makes it very small and difficult to see the distribution of smoking rules from 1900 to today.
 
-```{r8 global_options}
+```{r}
 #First filtered the data set to only include buildings built after 1899
 apt_buildings_after_1900 <- filter(apt_buildings, year_built > 1899)
 
@@ -308,7 +308,7 @@ plot(smoking_distribution)
 
 Computing the summary statistics of the number of units across the groups of types of properties. Here, I am using number of units as a proxy for the size of the apartment building.
 
-```{r9 global_options}
+```{r}
 #Pivot wider to make property type into columns with values from number of units 
 property_type_and_no_units <- apt_buildings %>%
           pivot_wider(id_cols = id,
@@ -333,7 +333,7 @@ summary(property_type_and_no_units)
 
 2.  *Graphing*: #5) Create 3 histograms out of summarized variables, with each histogram having different sized bins. Pick the "best" one and explain why it is the best:
 
-```{r10 global_options}
+```{r}
 #First create histograms with distributions of number of units for each of the property types, using the data set created above
 
 priv_number_of_units <- property_type_and_no_units %>%
@@ -379,7 +379,7 @@ plot(TCHC_number_of_units_5_bins)
 
     -   Central heating systems were invented in 1919
 
-```{r11 global_options}
+```{r}
 #First isolating only the year_built category from the entire data set
 year_built_only <- select(apt_buildings, year_built)
 
@@ -402,7 +402,7 @@ head(apt_buildings_heat_categories)
 
 I want to create a plot showing the distribution of different heating sources over time.
 
-```{r12 global_options}
+```{r}
 heating_over_time <- apt_buildings %>%
   ggplot(aes(x= year_built))+
   geom_density(aes(group = `heating_type`, color = `heating_type`))
@@ -418,7 +418,7 @@ plot(heating_over_time)
 
 I want to compute the number of buildings that have a barrier free accessibility entrance
 
-```{r13 global_options}
+```{r}
 #First separate the data set into two separate data sets, one for accessible entrances, and one for non-accessible entrances: 
 barrier_free_entrance <- filter (apt_buildings, `barrier_free_accessibilty_entr` == "YES") %>%
             select(`id`,`barrier_free_accessibilty_entr`)
@@ -438,7 +438,7 @@ dim(barrier_entrance)
 
 I want to visualize how the number of barrier free accessible units has changed over time, and to see if buildings with more barrier free accessible units also a barrier free accessible entrance.
 
-```{r14 global_options}
+```{r}
 accessibility_over_time <- apt_buildings %>%
                     ggplot(aes(x = year_built, y = no_barrier_free_accessible_units))+ 
                     geom_point(alpha = 0.5, aes(color = barrier_free_accessibilty_entr))+ 
