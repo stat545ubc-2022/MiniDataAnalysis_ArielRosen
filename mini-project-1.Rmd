@@ -175,13 +175,13 @@ head(exercise_2)
 It makes sense to answer this question by plotting number of stories as a function of year built to visualize the changes in the number of stories over time. I decided to use a dot plot with an alpha of 0.02 to be able to see the density distributions of the different number of stories over time.
 
 ```{r}
-exercise_4 <- apt_buildings %>%
+(exercise_4 <- apt_buildings %>%
                ggplot(aes(year_built, no_of_storeys, alpha= 0.02))+
                geom_point()+
                ggtitle("Number of stories over time")+
-               ylab(label = "Number of stories")
+               ylab(label = "Number of stories"))
              
-plot(exercise_4)
+
 ```
 
 **6: Use a boxplot to look at the frequency of different observations within a single variable. You can do this for more than one variable if you wish!**
@@ -194,20 +194,18 @@ yr_blt_before_1950 <- filter(apt_buildings, year_built <= 1950)
 yr_blt_1950_today <- filter(apt_buildings, year_built > 1950)
 
 #Using a boxplot to look at the number of storeys over the two groups of years
-exercise_6_before_1950 <- yr_blt_before_1950 %>% 
+(exercise_6_before_1950 <- yr_blt_before_1950 %>% 
         ggplot(aes(group = year_built, x = year_built, y = no_of_storeys))+
         geom_boxplot (outlier.size = 0.2)+ 
         ggtitle("Frequency of number of stories from 1805 to 1950")+
-        ylab("Number of stories")
+        ylab("Number of stories"))
 
-exercise_6_1950_today <- yr_blt_1950_today %>% 
+(exercise_6_1950_today <- yr_blt_1950_today %>% 
         ggplot(aes(group = year_built, x = year_built, y = no_of_storeys))+
         geom_boxplot(outlier.size = 0.2)+ 
         ggtitle("Frequency of number of stories from 1951 to 2019")+
-        ylab("Number of stories")
-  
-plot(exercise_6_before_1950)
-plot(exercise_6_1950_today)
+        ylab("Number of stories"))
+
 ```
 
 **7. Make a new tibble with a subset of your data, with variables and observations that you are interested in exploring.**
@@ -292,12 +290,11 @@ I want to visualize how the distribution of smoking vs. non-smoking buildings ha
 apt_buildings_after_1900 <- filter(apt_buildings, year_built > 1899)
 
 #Then plot the distribution of smoking vs. non-smoking buildings over time 
-smoking_distribution <- apt_buildings_after_1900 %>%
+(smoking_distribution <- apt_buildings_after_1900 %>%
     ggplot(mapping = aes(x = year_built, fill = `non-smoking_building`))+ 
     geom_bar(width =0.7)+
-    ggtitle("Distribution of smoking rules over time")
+    ggtitle("Distribution of smoking rules over time"))
 
-plot(smoking_distribution)
 ```
 
 -   This task helps me answer the research question because I can visually see how the distribution of smoking vs. non-smoking buildings has changes over time.
@@ -336,33 +333,26 @@ summary(property_type_and_no_units)
 ```{r}
 #First create histograms with distributions of number of units for each of the property types, using the data set created above
 
-priv_number_of_units <- property_type_and_no_units %>%
+(priv_number_of_units <- property_type_and_no_units %>%
   ggplot(aes(PRIVATE))+ geom_histogram(bins = 15)+ 
-  ggtitle("Distribution of number of units across private properties")
+  ggtitle("Distribution of number of units across private properties"))
 
-TCHC_number_of_units_10_bins <- property_type_and_no_units %>%
+(TCHC_number_of_units_10_bins <- property_type_and_no_units %>%
   ggplot(aes(TCHC))+ geom_histogram(bins = 10)+ 
-  ggtitle("Distribution of number of units across TCHC properties (10 bins)")
+  ggtitle("Distribution of number of units across TCHC properties (10 bins)"))
 
-social_number_of_units <- property_type_and_no_units %>%
+(social_number_of_units <- property_type_and_no_units %>%
   ggplot(aes(`SOCIAL HOUSING`))+ geom_histogram(bins = 10)+ 
-  ggtitle("Distribution of number of units across social housing properties")
+  ggtitle("Distribution of number of units across social housing properties"))
 
 #To answer the prompt, created 2 more histograms from the TCHC data with different bin sizes to compare which is best
-TCHC_number_of_units_20_bins <- property_type_and_no_units %>%
+(TCHC_number_of_units_20_bins <- property_type_and_no_units %>%
   ggplot(aes(TCHC))+ geom_histogram(bins = 20)+ 
-  ggtitle("Distribution of number of units across TCHC properties (20 bins)")
+  ggtitle("Distribution of number of units across TCHC properties (20 bins)"))
 
-TCHC_number_of_units_5_bins <- property_type_and_no_units %>%
+(TCHC_number_of_units_5_bins <- property_type_and_no_units %>%
   ggplot(aes(TCHC))+ geom_histogram(bins = 5)+ 
-  ggtitle("Distribution of number of units across TCHC properties (5 bins)")
-
-#plot the histograms 
-plot(priv_number_of_units)
-plot(social_number_of_units)
-plot(TCHC_number_of_units_10_bins)
-plot(TCHC_number_of_units_20_bins)
-plot(TCHC_number_of_units_5_bins)
+  ggtitle("Distribution of number of units across TCHC properties (5 bins)"))
 ```
 
 -   To align with the research question, I decided to create histograms for each property type. Then, to answer the prompt, I created 2 additional histograms for the TCHC property type with various bin numbers to compare which looks best.
@@ -384,13 +374,13 @@ plot(TCHC_number_of_units_5_bins)
 year_built_only <- select(apt_buildings, year_built)
 
 #Dividing the years_built_only  into 3 categories based on stoves, electric, and central heat invention years
-    heat_categories <- within(year_built_only, 
-    {year_built.cat <- NA
-     year_built.cat[year_built < 1883] <- "stove and fireplace"
-     year_built.cat[year_built >= 1883 & year_built < 1919] <- "electric heater"
-     year_built.cat[year_built >= 1919] <- "central heat"}) 
+heat_categories <- within(year_built_only, 
+{year_built.cat <- NA
+ year_built.cat[year_built < 1883] <- "stove and fireplace"
+ year_built.cat[year_built >= 1883 & year_built < 1919] <- "electric heater"
+ year_built.cat[year_built >= 1919] <- "central heat"}) 
 #Making a new data frame with only heat category and year built
-    apt_buildings_heat_categories <- merge(apt_buildings, heat_categories, by = "year_built")%>%
+apt_buildings_heat_categories <- merge(apt_buildings, heat_categories, by = "year_built")%>%
       select(id, year_built, year_built.cat, heating_type)
 
 head(apt_buildings_heat_categories)
@@ -403,11 +393,9 @@ head(apt_buildings_heat_categories)
 I want to create a plot showing the distribution of different heating sources over time.
 
 ```{r}
-heating_over_time <- apt_buildings %>%
+(heating_over_time <- apt_buildings %>%
   ggplot(aes(x= year_built))+
-  geom_density(aes(group = `heating_type`, color = `heating_type`))
-plot(heating_over_time)
-
+  geom_density(aes(group = `heating_type`, color = `heating_type`)))
 ```
 
 -   This task helps answer the research question because we can visualize the rise and fall in popularity of different types of heating from 1805 to 2019. It is also interesting to see that in the 1950s the type of heating was quite often not reported.
