@@ -41,9 +41,14 @@ By the end of this milestone, you should:
 
 Begin by loading your data and the tidyverse package below:
 
-```{r, message = FALSE}
+```{r}
 library(datateachr) # <- might contain the data you picked!
 library(tidyverse)
+```
+
+```{r}
+install.packages("here")
+library(here)
 ```
 
 # Task 1: Tidy your data (15 points)
@@ -257,6 +262,8 @@ Take a summary table that you made from Milestone 1 (Task 4.2), and write it as 
 
 <!-------------------------- Start your work below ---------------------------->
 ```{r}
+#I want to convert the apt_buildings_heat_categories dataset from Milestone 1 to a csv in my output folder 
+write_csv(apt_buildings_heat_categories, here::here("output", "apt_buildings_heat_categories.csv"))
 ```
 <!----------------------------------------------------------------------------->
 
