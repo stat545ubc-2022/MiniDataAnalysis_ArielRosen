@@ -1,4 +1,4 @@
-Mini Data-Analysis Deliverable 1
+Mini Data-Analysis Deliverable 1 
 ================
 Ariel Rosen
 October 12, 2022
