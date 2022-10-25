@@ -278,7 +278,7 @@ Write your model object from Task 3 to an R binary file (an RDS), and load it ag
 ```{r}
 #Writing the linear regression model from Task 3 to an RDS, then saving it to the output folder
 saveRDS(lin_reg_percent_accessible, file = "lin_reg_percent_accessible.rds", ascii = FALSE, version = NULL, compress = TRUE)%>%
-  here::here("output", "lin_reg_percent_accessible.rds")
+  here::here("output")
 readRDS("lin_reg_percent_accessible.rds")
 ```
 
