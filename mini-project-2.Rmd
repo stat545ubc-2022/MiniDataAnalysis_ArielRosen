@@ -262,9 +262,8 @@ Take a summary table that you made from Milestone 1 (Task 4.2), and write it as 
 
 <!-------------------------- Start your work below ---------------------------->
 ```{r}
-#I want to convert the apt_buildings_heat_categories dataset from Milestone 1 to a csv in my output folder 
-
-write_csv(apt_buildings_heat_categories, here::here("output", "apt_buildings_heat_categories.csv"))
+#I want to convert the barrier_entrance dataset from Milestone 1 to a csv in my output folder 
+write_csv(barrier_entrance, here::here("output", "barrier_entrance.csv"))
 ```
 <!----------------------------------------------------------------------------->
 
