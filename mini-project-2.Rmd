@@ -245,6 +245,7 @@ Produce something relevant from your fitted model: either predictions on Y, or a
 ```{r}
 #looking for the p-value from the above linear regression model 
 broom::tidy(lin_reg_percent_accessible)
+
 ```
 
 -   Based on the outputted tibble, the p-value for the year-built is 5.15e-05 <!----------------------------------------------------------------------------->
@@ -274,6 +275,11 @@ Write your model object from Task 3 to an R binary file (an RDS), and load it ag
 -   The same robustness and reproducibility criteria as in 3.1 apply here.
 
 <!-------------------------- Start your work below ---------------------------->
+```{r}
+#Writing the linear regression model from Task 3 to an RDS, then saving it to the output folder.
+saveRDS(lin_reg_percent_accessible, file = "lin_reg_percent_accessible.rds", ascii = FALSE, version = NULL, compress = TRUE, here::here("output"))
+```
+
 
 <!----------------------------------------------------------------------------->
 
