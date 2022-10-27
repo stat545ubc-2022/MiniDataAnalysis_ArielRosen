@@ -291,7 +291,6 @@ Produce something relevant from your fitted model: either predictions on Y, or a
 ```{r}
 #looking for the p-value from the above linear regression model 
 broom::tidy(lin_reg_percent_accessible)
-
 ```
 
 -   Based on the outputted tibble, the p-value for the year-built is 5.15e-05 <!----------------------------------------------------------------------------->
@@ -355,6 +354,15 @@ You should have at least four folders in the top level of your repository: one f
 Each milestone document is contained in its respective folder, and nowhere else.
 
 Every level-1 folder (that is, the ones stored in the top level, like "Milestone1" and "output") has a `README` file, explaining in a sentence or two what is in the folder, in plain language (it's enough to say something like "This folder contains the source for Milestone 1").
+
+```{r}
+#Making a Milestone 1 folder: 
+dir.create(here::here("Milestone1"))
+
+#Making a Milestone 2 folder: 
+dir.create(here::here("Milestone2"))
+
+```
 
 ## Output (2 points)
 
