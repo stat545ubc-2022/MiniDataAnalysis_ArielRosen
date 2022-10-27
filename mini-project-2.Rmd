@@ -309,7 +309,8 @@ Take a summary table that you made from Milestone 1 (Task 4.2), and write it as 
 
 ```{r}
 #I want to convert the barrier_entrance dataset from Milestone 1 to a csv in my output folder 
-write_csv(barrier_entrance, here::here("output", "barrier_entrance.csv"))
+dir.create(here::here("output"))
+write_csv(barrier_entrance, file = here::here("output", "barrier_entrance.csv"))
 ```
 
 <!----------------------------------------------------------------------------->
@@ -324,8 +325,10 @@ Write your model object from Task 3 to an R binary file (an RDS), and load it ag
 
 ```{r}
 #Writing the linear regression model from Task 3 to an RDS, then saving it to the output folder
-saveRDS(lin_reg_percent_accessible, file = "lin_reg_percent_accessible.rds", ascii = FALSE, version = NULL, compress = TRUE)
-dir(here::here("output"))
+saveRDS(lin_reg_percent_accessible, file = here::here("output", "lin_reg_percent_accessible.rds"))
+
+#read the file
+readRDS(file = here::here("output","lin_reg_percent_accessible.rds"))
 ```
 
 <!----------------------------------------------------------------------------->
