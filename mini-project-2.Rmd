@@ -46,10 +46,6 @@ library(datateachr) # <- might contain the data you picked!
 library(tidyverse)
 ```
 
-```{r}
-install.packages("here")
-library(here)
-```
 
 # Task 1: Tidy your data (15 points)
 
@@ -309,6 +305,8 @@ Take a summary table that you made from Milestone 1 (Task 4.2), and write it as 
 
 ```{r}
 #I want to convert the barrier_entrance dataset from Milestone 1 to a csv in my output folder 
+barrier_entrance <- filter (apt_buildings, `barrier_free_accessibilty_entr` == "NO") %>%
+            select(`id`,`barrier_free_accessibilty_entr`)
 dir.create(here::here("output"))
 write_csv(barrier_entrance, file = here::here("output", "barrier_entrance.csv"))
 ```
