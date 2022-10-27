@@ -115,7 +115,7 @@ Now, you should be more familiar with your data, and also have made progress in 
 Explain your decision for choosing the above two research questions.
 
 <!--------------------------- Start your work below --------------------------->
-These two research questions present data frames that I am interested in further exploring. They both explore different variables over time (years), which I think will be useful for this assignment. Furthermore, I am interested in tidying some data to answer these particular research questions because I think they produced ineteresting plots in the last Milestone that I would like to pursue further. 
+These two research questions present data frames that I am interested in further exploring. They both explore different variables over time (years), which I think will be useful for this assignment. Furthermore, I am interested in tidying some data to answer these particular research questions because I think they produced interesting plots in the last Milestone that I would like to pursue further. 
 <!----------------------------------------------------------------------------->
 
 Now, try to choose a version of your data that you think will be appropriate to answer these 2 questions. Use between 4 and 8 functions that we've covered so far (i.e. by filtering, cleaning, tidy'ing, dropping irrelevant columns, etc.).
