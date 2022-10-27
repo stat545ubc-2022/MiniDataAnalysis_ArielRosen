@@ -241,7 +241,6 @@ I decided to reverse the order of the time period built, to have the present day
 ```
 I decided to group all buildings built prior to 1950 into an "other" category using `fct_collapse` because there is less data for buildings built before 1950, so this helps build a neater plot. Furthermore, this grouping could be useful for someone who is only interested in buildings built after 1950, but still wants to keep buildings before 1950 in the dataset. 
 
-
 <!----------------------------------------------------------------------------->
 
 # Task 3: Modelling
@@ -325,9 +324,8 @@ Write your model object from Task 3 to an R binary file (an RDS), and load it ag
 
 ```{r}
 #Writing the linear regression model from Task 3 to an RDS, then saving it to the output folder
-saveRDS(lin_reg_percent_accessible, file = "lin_reg_percent_accessible.rds", ascii = FALSE, version = NULL, compress = TRUE)%>%
-  here::here("output")
-readRDS("lin_reg_percent_accessible.rds")
+saveRDS(lin_reg_percent_accessible, file = "lin_reg_percent_accessible.rds", ascii = FALSE, version = NULL, compress = TRUE, here::here("Output"))
+
 ```
 
 <!----------------------------------------------------------------------------->
